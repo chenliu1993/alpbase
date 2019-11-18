@@ -4,7 +4,6 @@ FROM alpine:3.10
 MAINTAINER LIUCHEN
 COPY files/ /
 #COPY temp/ /
-
 RUN apk update; \
 	apk add --no-cache --virtual .build-deps \
         	iptables iproute2 ethtool socat util-linux ebtables udev kmod \
@@ -20,9 +19,14 @@ RUN apk update; \
 	mkdir -p /opt/cni/bin; \
 	tar -C /opt/cni/bin -xzvf cni-plugins-linux-amd64-v0.8.3.tgz; \
 	rm -rf cni-plugins-linux-amd64-v0.8.3.tgz; \
-	mkdir -p /etc/kubernetes/manifests;  
+	mkdir -p /etc/kubernetes/manifests; 
+#RUN nohup dockerd --log-level debug 2>&1 > dockerd.output &
+
+VOLUME ["/var/lib/rancher/k3s"]
+
+#RUN curl -sfL https://get.k3s.io | sh -; 
 	
 
 ENV container docker
 
-ENTRYPOINT [ "/bin/sh" ] 
+ENTRYPOINT [ "/usr/local/bin/entrypoint", "/sbin/init" ] 
