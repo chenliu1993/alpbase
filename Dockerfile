@@ -8,7 +8,7 @@ RUN apk update; \
 	apk add --no-cache --virtual .build-deps \
         	iptables iproute2 ethtool socat util-linux ebtables udev kmod \
      		bash ca-certificates curl rsync \ 
-		containerd docker openrc wget tar; \
+		containerd openrc wget tar; \
 	mkdir -p /run/openrc; \
 	touch /run/openrc/softlevel; \
 	export PATH=$PATH:/usr/local/bin; \
