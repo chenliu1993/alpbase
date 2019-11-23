@@ -20,7 +20,6 @@ RUN apk update; \
 	tar -C /opt/cni/bin -xzvf cni-plugins-linux-amd64-v0.8.3.tgz; \
 	rm -rf cni-plugins-linux-amd64-v0.8.3.tgz; \
 	mkdir -p /etc/kubernetes/manifests; 
-#RUN nohup dockerd --log-level debug 2>&1 > dockerd.output &
 
 VOLUME ["/var/lib/rancher/k3s"]
 
